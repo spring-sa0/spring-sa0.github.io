@@ -1,0 +1,134 @@
+% Setting up the document class for a professional report
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc} % Using T2A for Cyrillic support if needed
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tocloft}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{noto} % Using Noto font for reliability
+
+% Configuring page geometry
+\geometry{margin=1in}
+
+% Customizing section titles
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Setting up the title page
+\title{Rapport Final : Évaluation de l'Empreinte Carbone des Projets}
+\author{Projet réalisé dans le cadre d'une institution financière}
+\date{24 Juin 2025}
+
+% Beginning the document
+\begin{document}
+
+% Creating the title page
+\maketitle
+\begin{center}
+    \vspace{1cm}
+    \textbf{Rapport préparé pour l'évaluation des projets soumis à une banque}
+\end{center}
+
+% Table of contents
+\tableofcontents
+\newpage
+
+% Introduction section
+\section{Introduction}
+% Describing the project objectives
+Ce rapport présente les résultats du projet visant à développer une application pour évaluer l'empreinte carbone des projets soumis à une institution financière, comme une banque ou un fonds vert. L'objectif principal était de fournir un outil permettant :
+\begin{itemize}
+    \item D'évaluer automatiquement l'empreinte carbone des projets.
+    \item De classer les projets selon leur impact environnemental (vert, acceptable, très polluant).
+    \item D'attribuer un score carbone de 0 à 100.
+    \item De proposer des recommandations pour réduire l'impact environnemental.
+\end{itemize}
+L'application, développée avec Streamlit, utilise des techniques de data mining telles que les arbres de décision et les règles d'association, et s'appuie sur des données simulées en attendant l'intégration de bases publiques comme l'ADEME ou ecoinvent.
+
+% Project Description section
+\section{Description du Projet}
+% Outlining the technical implementation
+\subsection{Objectifs Techniques}
+L'application permet aux utilisateurs de soumettre des projets via un formulaire interactif, d'obtenir un score carbone calculé, une classification, et des recommandations. Les principales fonctionnalités incluent :
+\begin{itemize}
+    \item Formulaire de soumission avec des champs pour le nom, le secteur, l'énergie, le transport, les matériaux, la durée, et la taille de l'équipe.
+    \item Visualisation des facteurs contributifs via des graphiques interactifs (barres et jauge).
+    \item Génération de rapports PDF pour documenter les résultats.
+    \item Historique et comparaison des projets soumis.
+\end{itemize}
+
+% Detailing the technologies used
+\subsection{Technologies Utilisées}
+\begin{itemize}
+    \item \textbf{Streamlit} : Interface utilisateur interactive avec des visualisations via Plotly.
+    \item \textbf{Python} : Calculs, modèles d'apprentissage, et gestion des données avec Pandas, NumPy, et Scikit-learn.
+    \item \textbf{Reportlab} : Génération de rapports PDF.
+    \item \textbf{Plotly} : Graphiques dynamiques pour l'analyse des impacts.
+\end{itemize}
+
+% Explaining the data mining techniques
+\subsection{Techniques de Data Mining}
+\begin{itemize}
+    \item \textbf{Arbre de décision} : Classification des projets en fonction de leur impact environnemental, entraîné sur un dataset simulé.
+    \item \textbf{Règles d'association} : Identification de comportements récurrents (ex. : énergie fossile + transport international = forte empreinte).
+    \item \textbf{Scoring carbone} : Modèle pondéré basé sur les critères d'énergie, transport, matériaux, durée, et taille d'équipe.
+\end{itemize}
+
+% Challenges section
+\section{Difficultés Rencontrées}
+% Listing the main challenges faced
+Au cours du développement, plusieurs défis ont été rencontrés :
+
+% Challenge 1: Simulated data
+\subsection{Données Simulées}
+En l'absence d'accès immédiat à des bases de données publiques comme l'ADEME ou ecoinvent, un dataset simulé a été utilisé. Cela a limité la précision des modèles, notamment pour l'arbre de décision, qui repose sur un petit ensemble d'exemples. L'intégration de données réelles nécessiterait des API ou des importations CSV, ce qui impliquerait des coûts ou des contraintes d'accès.
+
+% Challenge 2: Model complexity
+\subsection{Complexité des Modèles}
+Le modèle de scoring carbone est simplifié et basé sur des poids arbitraires. Une analyse du cycle de vie (ACV) réelle requerrait des calculs plus complexes et des données détaillées sur chaque phase du projet. De plus, l'arbre de décision manque de robustesse en raison de la taille réduite du dataset d'entraînement.
+
+% Challenge 3: Document analysis
+\subsection{Analyse des Documents}
+Bien que l'application permette l'upload de fichiers PDF ou texte, aucune analyse automatique du contenu n'a été implémentée. L'extraction d'informations pertinentes (ex. : via PyPDF2 ou textract) nécessiterait un traitement supplémentaire, augmentant la complexité du projet.
+
+% Challenge 4: UI/UX optimization
+\subsection{Optimisation de l'Interface}
+Malgré les améliorations visuelles (CSS personnalisé, animations, jauge), l'interface pourrait bénéficier d'une ergonomie plus poussée, comme des formulaires dynamiques ou des visualisations 3D. Les animations (ballons, flocons) sont limitées par les capacités natives de Streamlit.
+
+% Perspectives section
+\section{Perspectives}
+% Outlining future improvements
+Le projet offre plusieurs opportunités d'amélioration et d'extension :
+
+% Perspective 1: Real data integration
+\subsection{Intégration de Données Réelles}
+Connecter l'application à des bases comme l'ADEME, ecoinvent, ou Project Drawdown via des API ou des fichiers importés permettrait d'améliorer la précision des calculs et des classifications. Cela nécessiterait une infrastructure pour gérer les mises à jour des données.
+
+% Perspective 2: Advanced models
+\subsection{Modèles Avancés}
+Remplacer le modèle de scoring simplifié par une véritable analyse du cycle de vie (ACV) et utiliser des algorithmes plus robustes (ex. : forêts aléatoires, réseaux neuronaux) pour la classification. Un dataset d'entraînement plus large serait également nécessaire.
+
+% Perspective 3: Document processing
+\subsection{Traitement des Documents}
+Implémenter l'extraction de texte des fichiers uploadés (PDF, texte) pour pré-remplir le formulaire ou enrichir l'analyse. Des bibliothèques comme PyPDF2, textract, ou des modèles NLP pourraient être utilisés.
+
+% Perspective 4: Enhanced UI/UX
+\subsection{Amélioration de l'Interface}
+Ajouter des animations plus sophistiquées (ex. : via Streamlit Lottie), des visualisations interactives (ex. : graphiques 3D avec Plotly), et une interface multilingue pour une adoption internationale.
+
+% Perspective 5: Scalability
+\subsection{Mise à l'Échelle}
+Déployer l'application sur un serveur cloud (ex. : Heroku, AWS) pour une utilisation à grande échelle par des institutions financières. Une base de données (ex. : SQLite, PostgreSQL) pourrait remplacer la gestion en mémoire de l'historique des projets.
+
+% Conclusion section
+\section{Conclusion}
+% Summarizing the achievements
+Ce projet a permis de développer une application fonctionnelle pour évaluer l'empreinte carbone des projets, avec une interface utilisateur intuitive et des fonctionnalités d'analyse et de reporting. Malgré les contraintes liées aux données simulées et à la simplicité des modèles, l'outil répond aux objectifs initiaux et offre une base solide pour des améliorations futures. Les perspectives d'intégration de données réelles, de modèles avancés, et d'optimisation de l'interface ouvrent la voie à une solution robuste pour les institutions financières souhaitant financer des projets durables.
+
+\end{document}
